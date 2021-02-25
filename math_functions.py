@@ -7,19 +7,22 @@
 
                  See the assignment notes for a description of its contents.
 """
+import math
+ln_e =  math.e # YOUR CODE HERE
 
-ln_e =  # YOUR CODE HERE
-
-twenty_radians =  # YOUR CODE HERE
+twenty_radians = math.radians(20)  # YOUR CODE HERE
 
 
 def quotient_ceil(numerator, denominator):
     """ YOUR CODE HERE """
+    return math.ceil(numerator / denominator)
 
 
 def quotient_floor(numerator, denominator):
     """ YOUR CODE HERE """
-
+    return math.floor(numerator / denominator)
 
 def manhattan(x1, y1, x2, y2):
     """ YOUR CODE HERE """
+    return abs(x1 - x2) + abs(y1 - y2)
+
