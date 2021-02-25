@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 
 """ File name:   hello_world.py
-    Author:
-    Date:
+    Author: Yixi Rao
+    Date: 25/02/2021
     Description: This file prints hello world and a few other things to screen.
 """
 
