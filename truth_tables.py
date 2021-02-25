@@ -1,31 +1,31 @@
 """ File name:   truth_tables.py
-    Author:      <your name goes here>
-    Date:        <the date goes here>
+    Author:      Yixi Rao
+    Date:        25/02/2021
     Description: This file defines a number of functions which implement Boolean
-                 expressions.
+                expressions.
 
-                 It also defines a function to generate and print truth tables
-                 using these functions.
+                It also defines a function to generate and print truth tables
+                using these functions.
 
-                 It should be implemented for Exercise 2 of Assignment 0.
+                It should be implemented for Exercise 2 of Assignment 0.
 
-                 See the assignment notes for a description of its contents.
+                See the assignment notes for a description of its contents.
 """
 
 
 def boolean_fn1(a, b, c):
     """ Return the truth value of (a ∨ b) → (-a ∧ -b) """
-    # YOUR CODE HERE
+    return (not (a or b)) or ((not a) and (not b))
 
 
 def boolean_fn2(a, b, c):
     """ Return the truth value of (a ∧ b) ∨ (-a ∧ -b) """
-    # YOUR CODE HERE
+    return (a and b) or ((not a) and (not b))
 
 
 def boolean_fn3(a, b, c):
     """ Return the truth value of ((c → a) ∧ (a ∧ -b)) ∨ (-a ∧ b) """
-    # YOUR CODE HERE
+    return ((not c or a) and (a and (not b))) or ((not a) and b)
 
 
 def draw_truth_table(boolean_fn):
@@ -50,4 +50,32 @@ def draw_truth_table(boolean_fn):
         True  True  False False
         True  True  True  False
     """
-    # YOUR CODE HERE
+    print("a     b     c     res")
+    print("-----------------------")
+    a = 0
+    b = 0
+    c = 0
+    while a != 2:
+        while b != 2:
+            while c != 2:
+                if a != 0:
+                    va = str(a != 0) + " "
+                else:
+                    va = str(a != 0)
+                if b != 0:
+                    vb = str(b != 0) + " "
+                else:
+                    vb = str(b != 0)
+                if c != 0:
+                    vc = str(c != 0) + " "
+                else:
+                    vc = str(c != 0)
+                print(va + " " + vb + " " + vc + " " + str(boolean_fn(a != 0, b != 0, c != 0)))
+                c = c + 1
+            c = 0
+            b = b + 1
+        b = 0
+        a = a + 1
+
+
+
