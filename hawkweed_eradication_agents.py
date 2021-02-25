@@ -2,7 +2,7 @@
     Author:      <your name goes here>
     Date:        <the date goes here>
     Description: This file contains agents which manage and eradicate hawkweed. 
-                 It is used in Exercise 4 of Assignment 0.
+                It is used in Exercise 4 of Assignment 0.
 """
 
 import random
