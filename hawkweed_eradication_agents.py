@@ -1,12 +1,12 @@
 """ File name:   hawkweed_eradication_agents.py
-    Author:      <your name goes here>
-    Date:        <the date goes here>
+    Author:      Yixi Rao
+    Date:        27/02/2021
     Description: This file contains agents which manage and eradicate hawkweed. 
                 It is used in Exercise 4 of Assignment 0.
 """
 
 import random
-
+from queue import PriorityQueue
 
 class HawkweedEradicationAgent:
     """ A simple hawkweed eradication agent. """
@@ -51,7 +51,86 @@ class HawkweedEradicationAgent:
 
 class SmartHawkweedEradicationAgent(HawkweedEradicationAgent):
     def __init__(self, locations, conn):
-        """ YOUR CODE HERE. """
+        super().__init__(locations ,conn)
+        self.target = None
+        self.path = None
+        self.max_hawkweed = None
 
     def choose_move(self, location, valid_moves, hawkweed, threshold, growth, spread):
-        """ YOUR CODE HERE. """
+        if max(hawkweed.values()) == 0 and self.path == None:
+            return location
+        
+        max_hawkweed_loc = max(hawkweed, key = hawkweed.get)
+            
+        if self.target == max_hawkweed_loc:
+            next_loc = self.path[0]
+            if next_loc == self.target:
+                self.path = None
+            else:
+                self.path.remove(next_loc)
+            return next_loc
+        elif self.max_hawkweed == max(hawkweed.values()) and hawkweed.values().count(max(hawkweed.values())) > 1:
+            next_loc = self.path[0]
+            if next_loc == self.target:
+                self.path = None
+            else:
+                self.path.remove(next_loc)
+            return next_loc
+        else:
+            self.target = max_hawkweed_loc
+            self.max_hawkweed = max(hawkweed.values())
+            self.dijkstra(location, valid_moves, hawkweed, threshold, growth, spread, max_hawkweed_loc)
+            
+            next_loc = self.path[0]
+            if next_loc == self.target:
+                self.path = None
+            else:
+                self.path.remove(next_loc)
+            return next_loc
+
+            
+            
+            
+            
+        
+        
+    def dijkstra(self, location, valid_moves, hawkweed, threshold, growth, spread, destination):
+        
+        S                 = location
+        visited_locations = dict([(x, False)        for x in self.locations])
+        distance_table    = dict([(x, float("inf")) for x in self.locations])
+        path_table        = dict([(x, None)         for x in self.locations])
+        distance_table[S] = 0
+        
+        Q = PriorityQueue()
+        Q.put((0, S))
+        
+        while (not Q.empty()):
+            node_U = Q.get()[1]
+            
+            if visited_locations[node_U]:
+                continue
+            
+            visited_locations[node_U] == True
+            
+            conn_edges = self.conn[node_U]
+            
+            for edge in conn_edges:
+                if not visited_locations[edge] and 1 + distance_table[node_U] < distance_table[edge]:
+                    distance_table[edge] = 1 + distance_table[node_U]
+                    Q.put((distance_table[edge], edge))
+                    path_table[edge] = node_U
+        
+        parent_path = path_table[destination]
+        shortest_path = []
+        shortest_path.append(destination)
+        while (parent_path != S):
+            shortest_path.append(parent_path)
+            parent_path = path_table[parent_path]
+        
+        shortest_path.reverse()
+        self.path = shortest_path
+            
+        
+        
+        
