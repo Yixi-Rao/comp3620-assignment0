@@ -73,23 +73,23 @@ class HawkweedScenario:
 
     def spread_hawkweed(self):
         const_threshold = self.threshold
-        const_growth = self.growth
-        const_spread = self.spread
-        Agent_location = self.location
-        new_hawkweed = {}
+        const_growth    = self.growth
+        const_spread    = self.spread
+        Agent_location  = self.location
+        new_hawkweed    = {}
         
         for loc,num in self.hawkweed.items():
             if loc == Agent_location:
                 new_hawkweed[loc] = 0.0
                 continue
 
-            new_hawkweed[loc] = num * (1 + const_growth)
+            new_hawkweed[loc] = num * (1.0 + const_growth)
 
             adj_locs = self.conn[loc]
             for adj_loc in adj_locs:
                 adj_num = self.hawkweed[adj_loc]
                 if adj_loc != Agent_location and adj_num >= const_threshold:
-                    new_hawkweed[loc] =+ (adj_num * const_spread)
+                    new_hawkweed[loc] = new_hawkweed[loc] + (adj_num * const_spread)
                 
         self.hawkweed = new_hawkweed
                     
