@@ -14,17 +14,26 @@
 
 
 def boolean_fn1(a, b, c):
-    """ Return the truth value of (a ∨ b) → (-a ∧ -b) """
+    """ Return the truth value of (a ∨ b) → (-a ∧ -b) 
+    
+        (bool, bool, bool) -> bool
+    """
     return (not (a or b)) or ((not a) and (not b))
 
 
 def boolean_fn2(a, b, c):
-    """ Return the truth value of (a ∧ b) ∨ (-a ∧ -b) """
+    """ Return the truth value of (a ∧ b) ∨ (-a ∧ -b)
+    
+        (bool, bool, bool) -> bool 
+    """
     return (a and b) or ((not a) and (not b))
 
 
 def boolean_fn3(a, b, c):
-    """ Return the truth value of ((c → a) ∧ (a ∧ -b)) ∨ (-a ∧ b) """
+    """ Return the truth value of ((c → a) ∧ (a ∧ -b)) ∨ (-a ∧ b) 
+    
+        (bool, bool, bool) -> bool
+    """
     return ((not c or a) and (a and (not b))) or ((not a) and b)
 
 

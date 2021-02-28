@@ -26,9 +26,9 @@ def load_dfa(path_to_dfa_file):
 
         (str) -> Object
     """
-    initial_states = []
-    accepting_states = []
-    transitions = {}
+    initial_states   = [] # all the starting states
+    accepting_states = [] # all the ending states
+    transitions      = {} # all the transitions (state_X state_Y --> lable)
     with open(path_to_dfa_file) as dfa_file:
         for line in dfa_file:
             line = line[:-1]
@@ -40,7 +40,7 @@ def load_dfa(path_to_dfa_file):
                 accepting_states = cutting_line[1:]
             else:
                 transitions[cutting_line[1] + " " + cutting_line[2]] = cutting_line[3]
-    return (initial_states, accepting_states, transitions)
+    return (initial_states, accepting_states, transitions) 
             
 
 
@@ -52,14 +52,13 @@ def accepts_word(dfa, word):
         (Object, str) -> bool
     """
 
-    initial_states = dfa[0][0]
+    initial_states   = dfa[0][0]     
     accepting_states = dfa[1]
-    transitions = dfa[2]
-
-    current_state = initial_states
+    transitions      = dfa[2]
+    current_state    = initial_states # This will be used to record the current state
 
     for index in range(len(word) + 1):
-        if index == len(word):
+        if index == len(word): # in the final run it will check wether it is a valid word
             if current_state in accepting_states:
                 return True
             else:
@@ -71,7 +70,7 @@ def accepts_word(dfa, word):
                 two_states = transition.split(" ")
                 if two_states[0] == current_state and label == current_char:
                     current_state = two_states[1]
-                    have_transition = True
+                    have_transition = True # find the transition of this char in index "index"
                     break
             if not have_transition:
                 return False       
